@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title></title>
+  </head>
+
+
+  <body>
+    <!-- 模版语法 -->
+    <div id="app">
+      {{ message }}
+    </div>
+
+    <!-- v-bind: -->
+    <div id="app-2">
+      <span v-bind:title="message">
+        鼠标悬停几秒钟查看此处动态绑定的提示信息！
+      </span>
+    </div>
+
+    <!-- v-if -->
+    <div id="app-3">
+      <p v-if="seen">现在你看到我了</p>
+    </div>
+
+<!-- v-for -->
+    <div id="app-4">
+      <ol>
+        <li v-for="todo in todos">
+          {{ todo.text }}
+        </li>
+      </ol>
+    </div>
+
+<!-- v-on:click="function" -->
+    <div id="app-5">
+      <p>{{ message }}</p>
+      <button v-on:click="reverseMessage">反转消息</button>
+    </div>
+
+<!-- v-model双向绑定 -->
+    <div id="app-6">
+      <p>{{ message }}</p>
+      <input v-model="message">
+    </div>
+
+    <div id="app-7">
+      <base-checkbox v-model="lovingVue"></base-checkbox>
+    </div>
+
+<!-- v-if v-else-if  v-else -->
+    <div id="app-8">
+      <div v-if="show==='a'">This is A</div>
+      <div v-else-if="show==='b'">This is B</div>
+      <div v-else-if="show==='c'">This is C</div>
+      <div v-else>This is others</div>
+    </div>
+
+    <!-- Vue.prototype.$abc = abc 绑定全局变量在实际项目用得比较多 -->
+
+  </body>
+
+  <script>
+      var app = new Vue({
+        el: '#app',
+        data: {
+          message: 'Hello Vue!'
+        }
+      })
+
+      var app2 = new Vue({
+        el: '#app-2',
+        data: {
+          message: '页面加载于 ' + new Date().toLocaleString()
+        }
+      })
+
+      var app3 = new Vue({
+        el: '#app-3',
+        data: {
+          seen: true
+        }
+      })
+
+      var app4 = new Vue({
+        el: '#app-4',
+        data: {
+          todos: [
+            { text: '学习 JavaScript' },
+            { text: '学习 Vue' },
+            { text: '整个牛项目' }
+          ]
+        }
+      })
+
+      var app5 = new Vue({
+        el: '#app-5',
+        data: {
+          message: 'Hello Vue.js!'
+        },
+        methods: {
+          reverseMessage: function () {
+            this.message = this.message.split('').reverse().join('')
+          }
+        }
+      })
+
+      var app6 = new Vue({
+        el: '#app-6',
+        data: {
+          message: 'Hello Vue!'
+        }
+      })
+      Vue.component('base-checkbox', {
+        model: {
+          prop: 'checked',
+          event: 'change'
+        },
+        props: {
+          checked: Boolean
+        },
+        template: `
+          <input
+            type="checkbox"
+            v-bind:checked="checked"
+            v-on:change="$emit('change', $event.target.checked)"
+          >
+        `
+      })
+      var app7 = new Vue({
+        el: '#app-7',
+        data: {
+          message: 'Hello Vue!'
+        }
+      })
+      var app8 = new Vue({
+        el: '#app-8',
+        data: {
+          show: 'c'
+        }
+      })
+
+  </script>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      *{
+        margin:0;
+        padding: 0;
+      }
+
+      .onepage{
+        background-color: skyblue;
+        width: 300px;
+        height: 500px;
+      }
+      .twopage{
+        background-color:deeppink;
+        width: 300px;
+        height: 500px;
+      }
+      .subonepage{
+        background-color:red;
+        width: 100px;
+        height: 200px;
+        display: block;
+      }
+      .subtwopage{
+        background-color:blue;
+        width: 100px;
+        height: 200px;
+        display: block;
+      }
+    </style>
+    <script src="./js/vue.js"></script>
+    <!-- vue-router必须在vue之后引入 -->
+    <script src="./js/vue-router.js"></script>
+  </head>
+  <body>
+    <!--
+    1. 什么是vue-router?
+    其实vue-router和v-if,v-show一样，是用来切换组件的显示的
+    v-if,v-show的标记是true/false
+    vue-router的标记则是哈希(也就是#/xxx),还能传递参数
+
+2.vue-router使用方法步骤
+2.1 导入
+2.2 定义路由规则
+2.3 根据路由规则创建路由对象
+2.4 将路由对象挂载到vue实例
+2.5 修改URL哈希值
+2.6 通过<router-view/>渲染匹配到的组件
+
+
+  -->
+
+
+<template id="one">
+  <div class="onepage">
+    <p>我是页面1</p>
+    <router-link to="/one/subone" tag="button">切换到sub页面1</router-link>
+    <router-link to="/one/subtwo" tag="button">切换到sub页面2</router-link>
+
+    <!-- 关键的一步：路由匹配到的组件将渲染在<router-view/>这里 -->
+    <router-view></router-view>
+  </div>
+</template>
+
+  <template id="subone">
+    <div class="subonepage">
+      <p>我是页面1-1</p>
+    </div>
+  </template>
+
+  <template id="subtwo">
+    <div class="subtwopage">
+      <p>我是页面1-2</p>
+    </div>
+  </template>
+
+
+<template id="two">
+  <div class="twopage">
+    <p>我是页面2</p>
+  </div>
+</template>
+
+
+    <div id="app1">我是app1控制的区域
+      <router-link to="/one" tag="button">切换到页面1</router-link>
+      <router-link to="/two" tag="button">切换到页面2</router-link>
+
+      <!-- 关键的一步：路由匹配到的组件将渲染在<router-view/>这里 -->
+      <router-view/>
+    </div>
+
+
+    <script type="text/javascript">
+    //1.定义组件
+      const subone = {
+        template: "#subone"
+      };
+
+      const subtwo = {
+        template: "#subtwo"
+      };
+
+      const one = {
+        template: "#one",
+        components:{
+          subone:subone,
+          subtwo:subtwo
+        }
+      };
+
+      const two = {
+        template: "#two"
+      };
+
+
+
+    //2.定义切换规则 数组中一个对象对应一个规则
+    //children中一定要写一级路由
+    //否则后面的就不要带/
+    /*
+    /one/subone
+    subone
+    这两种写法都可以
+    */
+    const routes = [
+      {
+        path:'/one',
+        component:one,
+        children:[
+        {
+          path:'/one/subone',
+          component:subone
+        },
+        {
+          path:'/one/subtwo',
+          component:subtwo
+        }
+      ]},
+      // {path:'/one/subone',component:subone},
+      // {path:'/one/subtwo',component:subtwo},
+      {path:'/two',component:two}
+    ];
+
+    //3.创建路由对象
+    const router = new VueRouter({
+      routes:routes
+    });
+
+    //4.挂载到vue实例
+
+      //这里可以注册全局的 组件，指令，过滤器...
+
+      let vue1 = new Vue({
+        el:'#app1',
+        router:router,
+        data:{
+          //注意自定义组件时，写法不同，是以函数的方式返回
+        },
+        methods:{
+        },
+        computed:{
+          //计算属性的特点就是 只要返回结果没有发生变化 那么就只会被执行一次
+        },
+        components:{
+          //自定义局部组件
+          one:one,
+          two:two
+        },
+        filters:{
+          //自定义局部过滤器
+        },
+        directives:{
+          //自定义局部指令
+        }
+      })
+
+    </script>
+  </body>
+</html>
+
+<!-- 指令可看作标签属性 -->

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      *{
+        margin:0;
+        padding: 0;
+      }
+      .size{
+        font-size: 20px;
+      }
+      .color{
+        color: red;
+      }
+      .active{
+        background: skyblue;
+      }
+
+    </style>
+    <script src="./js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p class="size color active">雷霆嘎巴 欧青辣少</p>
+      <p :class="['size']">今天再次奢侈一把</p>
+      <p :class="[flag?'size':'',{'active':false}]">卧槽无情</p>
+      <p :class="obj">你也可以直接赋值一个对象</p>
+    </div>
+
+    <script type="text/javascript">
+      let vue = new Vue({
+        el:'#app',
+        data:{
+          name:'刘声伟',
+          flag:false,
+          obj:{
+            'size':true,
+            'color':true,
+            'active':false
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
+
+<!-- 数据驱动界面的更新 无需手动操作
+注意格式
+ -->

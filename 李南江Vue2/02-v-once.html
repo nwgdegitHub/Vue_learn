@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+
+    </style>
+    <script src="./js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p v-once>{{name}}</p>
+    </div>
+
+    <script type="text/javascript">
+      let vue = new Vue({
+        el:'#app',
+        data:{
+          name:'刘声伟22'
+        }
+      })
+    </script>
+  </body>
+</html>
+<!-- 使用v-once指令进行修饰之后，对数据进行修改，界面不更新 -->
+<!-- 数据驱动界面的更新 无需手动操作 -->

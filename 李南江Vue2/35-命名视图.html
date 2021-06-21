@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      *{
+        margin:0;
+        padding: 0;
+      }
+
+      .onepage{
+        background-color: skyblue;
+        width: 300px;
+        height: 500px;
+      }
+      .twopage{
+        background-color:deeppink;
+        width: 300px;
+        height: 500px;
+      },
+      .nj-Active{
+        color:red;
+      }
+    </style>
+    <script src="./js/vue.js"></script>
+    <!-- vue-router必须在vue之后引入 -->
+    <script src="./js/vue-router.js"></script>
+  </head>
+  <body>
+
+    <!--
+    1.命名视图和插槽很像，都是让不同的出口显示不同的内容.
+    当路由地址被匹配到同时指定多个出口，并且每个出口中显示的内容不同 -->
+
+<template id="one">
+  <div class="onepage">
+    <p>我是页面1</p>
+  </div>
+</template>
+
+<template id="two">
+  <div class="twopage">
+    <p>我是页面2</p>
+  </div>
+</template>
+
+
+
+    <div id="app1">我是app1控制的区域
+
+
+      <!-- <a href="#/one">切换到页面1</a>
+      <a href="#/two">切换到页面2</a> -->
+
+      <!-- 通过router-link 标签的to属性 切换路由
+    tag="button" 的意思是显示模式采用按钮的形式 默认是a标签的形式
+    理论上可以重写 定制激活状态下的样式 但是有更好的办法 那就是创建router时
+  -->
+      <!-- <router-link to="/one" tag="button">切换到页面1</router-link>
+ -->
+
+      <!-- 关键的一步：路由匹配到的组件将渲染在<router-view/>这里
+      写多个时 要补上闭合标签
+      name属性 在路由规则中配置
+    -->
+      <router-view name="name1"></router-view>
+      <router-view name="name2"></router-view>
+    </div>
+
+
+    <script type="text/javascript">
+
+    const one = {
+      template: "#one"
+    };
+
+    const two = {
+      template: "#two"
+    };
+
+    //2.定义切换规则 数组中一个对象对应一个规则
+    const routes = [
+      {
+        path:'/',
+        components:{
+          name1:one,
+          name2:two
+        }
+      }
+    ];
+
+    //3.创建路由对象
+    const router = new VueRouter({
+      routes:routes,
+      linkActiveClass:"nj-Active"
+    });
+
+    //4.挂载到vue实例
+
+      //这里可以注册全局的 组件，指令，过滤器...
+
+      let vue1 = new Vue({
+        el:'#app1',
+        router:router,
+        data:{
+          //注意自定义组件时，写法不同，是以函数的方式返回
+        },
+        methods:{
+        },
+        computed:{
+          //计算属性的特点就是 只要返回结果没有发生变化 那么就只会被执行一次
+        },
+        components:{
+          //自定义局部组件
+          one:one,
+          two:two
+        },
+        filters:{
+          //自定义局部过滤器
+        },
+        directives:{
+          //自定义局部指令
+        }
+      })
+
+    </script>
+  </body>
+</html>
+
+<!-- 指令可看作标签属性 -->

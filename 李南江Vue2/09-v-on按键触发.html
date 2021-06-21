@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      *{
+        margin:0;
+        padding: 0;
+      }
+      .size{
+        font-size: 20px;
+      }
+      .color{
+        color: red;
+      }
+      .active{
+        background: skyblue;
+      }
+      .a{
+        width: 300px;
+        height: 300px;
+        background: red;
+      }
+      .b{
+        width: 200px;
+        height: 200px;
+        background: blue;
+      }
+      .c{
+        width: 100px;
+        height: 100px;
+        background: green;
+      }
+
+    </style>
+    <script src="./js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+
+      <input type="text" @keyup.enter="myFun" value="enter">
+      <input type="text" @keyup.tab="myFun" value="tab">
+      <input type="text" @keyup.delete="myFun" value="delete">
+      <input type="text" @keyup.esc="myFun" value="esc">
+      <input type="text" @keyup.space="myFun" value="space">
+      <input type="text" @keyup.up="myFun" value="up">
+      <input type="text" @keyup.down="myFun" value="down">
+      <input type="text" @keyup.left="myFun" value="left">
+      <input type="text" @keyup.right="myFun" value="right">
+      <input type="text" @keyup.f2="myFun" value="f2">
+      <input type="text" @keyup.113="myFun" value="f2">
+      <!-- 在Mac键盘上可能不同 -->
+    </div>
+
+    <script type="text/javascript">
+
+      //定义别名
+      Vue.config.keyCodes.f2 = 113
+
+      let vue = new Vue({
+        el:'#app',
+        data:{
+          name:'刘声伟',
+          flag:false,
+          obj:{
+            'size':true,
+            'color':true,
+            'active':false
+          },
+          objStyle:{
+            'color':'red',
+            'font-size':'100px'
+          },
+          objStyle2:{
+            'background-color': 'skyblue'
+          }
+        },
+        methods:{
+          myFun(){
+            console.log("myFun");
+          },
+          myFun1(){
+            console.log("myFun1");
+          },
+          myFun2(){
+            console.log("myFun2");
+          },
+          funcA(){
+            console.log("爷爷");
+          },
+          funcB(){
+            console.log("爸爸");
+          },
+          funcC(){
+            console.log("儿子");
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
+
+<!--
+v-on:事件名称=“回调函数名称”
+@事件名称=“回调函数名称
+
+会去Vue实例的methods:{}中找对应的回调函数
+
+v-on:click.修饰词="myFunc"
+
+回调函数后面写不写() 都没关系
+
+特殊按键 如回车键 ESC
+
+
+ -->

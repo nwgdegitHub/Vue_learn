@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      [v-cloak]{display: none}
+    </style>
+    <script src="./js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-bind:value="name">
+    </div>
+
+    <script type="text/javascript">
+      let vue = new Vue({
+        el:'#app',
+        data:{
+          name:'刘声伟'
+        }
+      })
+    </script>
+  </body>
+</html>
+
+<!--
+vue的{{ }}可以是
+表达式
+字符串
+函数
+正则表达式
+boolean
+
+ -->

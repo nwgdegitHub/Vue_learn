@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      *{
+        margin:0;
+        padding: 0;
+      }
+      .size{
+        font-size: 20px;
+      }
+      .color{
+        color: red;
+      }
+      .active{
+        background: skyblue;
+      }
+      .a{
+        width: 300px;
+        height: 300px;
+        background: red;
+      }
+      .b{
+        width: 200px;
+        height: 200px;
+        background: blue;
+      }
+      .c{
+        width: 100px;
+        height: 100px;
+        background: green;
+      }
+
+    </style>
+    <script src="./js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app1">我是app1控制的区域
+      <p>{{reverseMsg}}</p>
+    </div>
+
+
+    <script type="text/javascript">
+
+      let vue1 = new Vue({
+        el:'#app1',
+        data:{
+          name:'刘声伟',
+          objStyle:{
+            'color':'red',
+            'font-size':'100px'
+          },
+          msg:"abcdefg"
+        },
+        methods:{
+          myFun(){
+            console.log("myFun");
+          }
+        },
+        // 计算属性的特点就是 只要返回结果没有发生变化（这取决于data数据） 那么就只会被执行一次
+        // 这是由于计算属性会将返回结果缓存起来
+        // 所以如果返回的结果不经常变化
+        // 那么使用计算属性会比函数的性能高
+        computed:{
+          reverseMsg:function(){
+            return this.msg.split('').reverse().join('');
+          }
+        }
+      })
+
+    </script>
+  </body>
+</html>
+
+<!--
+v-on:事件名称=“回调函数名称”
+@事件名称=“回调函数名称
+
+会去Vue实例的methods:{}中找对应的回调函数
+
+v-on:click.修饰词="myFunc"
+
+回调函数后面写不写() 都没关系
+
+特殊按键 如回车键 ESC
+
+
+ -->

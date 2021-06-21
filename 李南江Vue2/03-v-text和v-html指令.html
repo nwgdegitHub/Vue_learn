@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      [v-cloak]{display: none}
+    </style>
+    <script src="./js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+
+      <p>++++{{name}}++++</p>
+      <p>++++{{msg}}++++</p>
+
+      <p v-html="msg">**************</p>
+      <p v-html="url">{{url}}</p>
+
+      <p v-text="msg">测试v-text,用{{}}当有延时 界面会显示{{}}</p>
+
+    </div>
+
+    <script type="text/javascript">
+      let vue = new Vue({
+        el:'#app',
+        data:{
+          name:'刘声伟',
+          msg:'<span>爱我中华</span>',
+          url:'<a href="http://www.baidu.com">百度一下</a>'
+        }
+      })
+    </script>
+  </body>
+</html>
+
+<!--
+  v-text相当于innerText
+  v-html相当于innerHTML
+ -->

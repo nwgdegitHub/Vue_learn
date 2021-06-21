@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      *{
+        margin:0;
+        padding: 0;
+      }
+
+    </style>
+    <script src="./js/vue.js"></script>
+  </head>
+  <body>
+
+    <!--
+    // Vue2.6之前 通过slot属性告诉Vue当前填充内容填给哪一个具名插槽
+    // Vue2.6之后 通过v-slot指令告诉Vue当前填充内容填给哪一个具名插槽
+    //
+    // v-slot指令只能用在template标签 可以用#替代v-slot:指令
+  -->
+
+  <div id="app1">
+    <h1>我是app1控制的区域</h1>
+    <father></father>
+  </div>
+
+  <template id="father">
+  <div>
+  <son>
+    <template v-slot:one>
+      <div>
+        我是使用插槽的时候填充的内容one
+        <a href="#">百度一下</a>
+      </div>
+    </template>
+
+    <template #two>
+      <div>
+        我是使用插槽的时候填充的内容two
+      </div>
+    </template>
+
+  </son>
+  </div>
+  </template>
+
+  <template id="son">
+  <div>
+  <div>我是头部</div>
+  <!--
+  这里的slot标签就是插槽
+  插槽就是一个坑
+  插槽可以指定默认数据
+  插槽可以指定名称 默认叫匿名插槽
+  插槽可以有多个 有多少个就填充多少个
+  -->
+  <slot name="one">我是插槽的默认数据1</slot>
+  <slot name="two">我是插槽的默认数据2</slot>
+  <div>我是底部</div>
+  </div>
+  </template>
+    <script type="text/javascript">
+
+      //这里可以注册全局的 组件，指令，过滤器...
+      Vue.component("father",{
+        template:"#father",
+      });
+      Vue.component("son",{
+        template:"#son",
+      });
+
+      let vue1 = new Vue({
+        el:'#app1',
+        data:{
+          //注意自定义组件时，写法不同，是以函数的方式返回
+        },
+        methods:{
+        },
+        computed:{
+          //计算属性的特点就是 只要返回结果没有发生变化 那么就只会被执行一次
+        },
+        components:{
+          //自定义局部组件
+        },
+        filters:{
+          //自定义局部过滤器
+        },
+        directives:{
+          //自定义局部指令
+        }
+      })
+
+    </script>
+  </body>
+</html>
+
+<!-- 指令可看作标签属性 -->

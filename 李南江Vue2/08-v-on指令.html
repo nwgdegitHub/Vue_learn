@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      *{
+        margin:0;
+        padding: 0;
+      }
+      .size{
+        font-size: 20px;
+      }
+      .color{
+        color: red;
+      }
+      .active{
+        background: skyblue;
+      }
+      .a{
+        width: 300px;
+        height: 300px;
+        background: red;
+      }
+      .b{
+        width: 200px;
+        height: 200px;
+        background: blue;
+      }
+      .c{
+        width: 100px;
+        height: 100px;
+        background: green;
+      }
+
+    </style>
+    <script src="./js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p v-on:click="myFun">点我p1</p>
+      <p @click="myFun1">简写点我p2</p>
+      <p @click.once="myFun1">只调一次</p>
+      <a href="http:www.9981ys1.com" @click.prevent="myFun2">调用event.preventDefault()</a>
+
+
+      <div class="a" @click.capture="funcA">
+        添加事件监听器时使用capature模式
+        <div class="b" @click.capture="funcB">
+          只当事件是从监听器绑定的元素本身触发时才触发回调 .self
+          <div class="c" @click.capture="funcC">
+              调用event.stopPropagation() 用stop
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <script type="text/javascript">
+      let vue = new Vue({
+        el:'#app',
+        data:{
+          name:'刘声伟',
+          flag:false,
+          obj:{
+            'size':true,
+            'color':true,
+            'active':false
+          },
+          objStyle:{
+            'color':'red',
+            'font-size':'100px'
+          },
+          objStyle2:{
+            'background-color': 'skyblue'
+          }
+        },
+        methods:{
+          myFun(){
+            console.log("myFun");
+          },
+          myFun1(){
+            console.log("myFun1");
+          },
+          myFun2(){
+            console.log("myFun2");
+          },
+          funcA(){
+            console.log("爷爷");
+          },
+          funcB(){
+            console.log("爸爸");
+          },
+          funcC(){
+            console.log("儿子");
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
+
+<!--
+v-on:事件名称=“回调函数名称”
+@事件名称=“回调函数名称
+
+会去Vue实例的methods:{}中找对应的回调函数
+
+v-on:click.修饰词="myFunc"
+
+回调函数后面写不写() 都没关系
+
+
+ -->

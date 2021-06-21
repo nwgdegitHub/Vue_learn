@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      *{
+        margin:0;
+        padding: 0;
+      }
+
+    </style>
+    <script src="./js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 简单点说就是在子组件执行父组件的方法  -->
+    <!-- 注意点：和传递数据不同，如果传递的是方法，那么在子组件中不需要接收
+                如果传递的是方法，那么需要在子组件中自定义一个方法
+                在子组件中使用这个自定义方法，且在这个自定义方法中通过this.$emit("自定义接收名称")
+                来触发父组件传递过来的方法
+   -->
+
+    <div id="app1">我是app1控制的区域
+      <father-component></father-component>
+    </div>
+    <template id="father">
+      <div>
+        <p>我是爸爸</p>
+        <button @click="say">点爸爸</button>
+        <!-- 通过parentsay将父组件的say方法传递给子组件 -->
+        <son-component @parentsay="say"></son-component>
+      </div>
+
+
+    </template>
+    <template id="son">
+      <div>
+        <p>我是儿子</p>
+        <button @click="sonFn">点儿子</button>
+      </div>
+      <!-- 注意自定义组件有且仅有一个根元素 像下面这个元素 是显示不出来的 -->
+      <h1>123</h1>
+    </template>
+
+
+    <script type="text/javascript">
+
+    Vue.component("father-component",{
+      template:"#father",
+      methods:{
+        say(){
+          console.log("father say");
+        }
+      },
+      components:{
+        "son-component":{
+          template:"#son",
+          methods:{
+            sonFn(){
+
+              this.$emit("parentsay")
+            }
+          }
+        }
+      }
+    });
+
+      let vue1 = new Vue({
+        el:'#app1',
+        data:{
+          name:'刘声伟',
+          objStyle:{
+            'color':'red',
+            'font-size':'100px'
+          },
+          msg:"abcdefg"
+        },
+        methods:{
+
+        },
+        computed:{
+
+        }
+      });
+
+    </script>
+  </body>
+</html>
+
+<!--
+v-on:事件名称=“回调函数名称”
+@事件名称=“回调函数名称
+
+会去Vue实例的methods:{}中找对应的回调函数
+
+v-on:click.修饰词="myFunc"
+
+回调函数后面写不写() 都没关系
+
+
+ -->

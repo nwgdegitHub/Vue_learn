@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      *{
+        margin:0;
+        padding: 0;
+      }
+
+    </style>
+    <script src="./js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app1">我是app1控制的区域 过滤器可以类似于函数 一样 传参数
+      <p>{{time|dateFormat("yyyy-MM-DD")}}</p>
+    </div>
+
+
+    <script type="text/javascript">
+
+    Vue.filter("dateFormat",function(obj,params){
+
+      console.log(params);
+
+      let date = new Date(obj)
+      let year = date.getFullYear()
+      let month = date.getMonth()+1+""
+      let day = date.getDate()+""
+      let hour = date.getHours()+""
+      let minute = date.getMinutes()+""
+      let second = date.getSeconds()+""
+
+
+      return `${year}-${month}-${day} ${hour}:${minute}:${second}`
+
+      //.padStart(2,"0") 是string的一个方法 意思是补足2位
+      // return `${year}-${month.padStart(2,"0")}-${day.padStart(2,"0")} ${hour.padStart(2,"0")}:${minute.padStart(2,"0")}:${second.padStart(2,"0")}`
+
+    })
+
+      let vue1 = new Vue({
+        el:'#app1',
+        data:{
+          time:Date.now()
+        },
+        methods:{
+          myFun(){
+            console.log("myFun");
+          }
+        },
+        computed:{
+          reverseMsg:function(){
+            return this.msg.split('').reverse().join('');
+          }
+        }
+      })
+
+    </script>
+  </body>
+</html>
+
+<!--
+过滤器常用来处理 格式化时间
+
+ -->

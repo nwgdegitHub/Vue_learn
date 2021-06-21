@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      *{
+        margin:0;
+        padding: 0;
+      }
+
+      .onepage{
+        background-color: skyblue;
+        width: 300px;
+        height: 500px;
+      }
+      .twopage{
+        background-color:deeppink;
+        width: 300px;
+        height: 500px;
+      },
+      .nj-Active{
+        color:red;
+      }
+    </style>
+    <script src="./js/vue.js"></script>
+    <!-- vue-router必须在vue之后引入 -->
+    <script src="./js/vue-router.js"></script>
+  </head>
+  <body>
+    <!--
+    watch属性属于vue实例
+1.watch属性是专门用来监听数据变化的 只要数据发生了变化 就会自动调用对应的数据回调方法
+2.watch属性还能监听路由变化 在企业开发中 我们可以判断当前界面是哪个界面跳转来的
+  -->
+
+  <template id="one">
+    <div class="onepage">
+      <p>我是页面1</p>
+    </div>
+  </template>
+
+  <template id="two">
+    <div class="twopage">
+      <p>我是页面2</p>
+    </div>
+  </template>
+
+
+    <div id="app1">我是app1控制的区域
+      <input type="text" v-model="num1"> +
+      <input type="text" v-model="num2"> =
+      <input type="text" v-model="res">
+      <br>
+      <router-link to="/one" tag="button">切换到页面1</router-link>
+      <router-link to="/two">切换到页面2</router-link>
+
+
+      <!-- 关键的一步：路由匹配到的组件将渲染在<router-view/>这里 -->
+      <router-view/>
+    </div>
+
+
+    <script type="text/javascript">
+    const one = {
+      template: "#one"
+    };
+
+    const two = {
+      template: "#two"
+    };
+    //2.定义切换规则 数组中一个对象对应一个规则
+    const routes = [
+      {path:'/',redirect:'/one'},
+      {path:'/one',component:one},
+      {path:'/two',component:two}
+    ];
+
+    //3.创建路由对象
+    const router = new VueRouter({
+      routes:routes,
+      linkActiveClass:"nj-Active"
+    });
+
+      //这里可以注册全局的 组件，指令，过滤器...
+
+      let vue = new Vue({
+        el:'#app1',
+router:router,
+        data:{
+          //注意自定义组件时，写法不同，是以函数的方式返回
+          num1:0,
+          num2:0,
+          res:0
+        },
+        methods:{
+        },
+        computed:{
+          //计算属性的特点就是 只要返回结果没有发生变化 那么就只会被执行一次
+        },
+        components:{
+          //自定义局部组件
+          one:one,
+          two:two
+        },
+        filters:{
+          //自定义局部过滤器
+        },
+        directives:{
+          //自定义局部指令
+        },
+        watch:{
+          num1:function(newValue,oldValue){
+            this.res = parseInt(this.num1) + parseInt(this.num2)
+          },
+          num2:function(newValue,oldValue){
+            this.res = parseInt(this.num1) + parseInt(this.num2)
+          },
+          res:function(newValue,oldValue){
+
+          },
+          "$route.path":function(newValue,oldValue){
+            console.log(newValue);
+            console.log(oldValue);
+          }
+
+        }
+      });
+
+      console.log(vue.$route);
+
+    </script>
+  </body>
+</html>
+
+<!-- 指令可看作标签属性 -->

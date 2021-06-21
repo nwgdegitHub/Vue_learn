@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      *{
+        margin:0;
+        padding: 0;
+      }
+
+    </style>
+    <script src="./js/vue.js"></script>
+  </head>
+  <body>
+
+    <!--
+    作用域插槽就是为了在子组件填充数据时 父组件可以使用数据
+    也就是说作用域插槽的应用场景：子组件提供数据 父组件决定渲染
+    步骤：
+    1.在slot标签绑定要暴露的数据
+    2.在父组件接收 插槽传过来的数据 slot-scope="abc"
+   -->
+
+    <div id="app1">我是app1控制的区域
+      <father></father>
+    </div>
+
+    <template id="father">
+      <div class="">
+        <son>
+          <template slot-scope="abc">
+            <div class="">我是填充内容{{abc.names}}</div>
+            比如使用数据 :
+            <ul>
+              <li v-for="(name,index) in abc.names">{{name}}</li>
+            </ul>
+          </template>
+
+        </son>
+      </div>
+    </template>
+
+    <template id="son">
+      <div class="">
+        <div class="">我是头部{{names}}</div>
+        <slot v-bind:names="names">我是插槽默认内容{{names}}</slot>
+        <div class="">我是底部</div>
+      </div>
+    </template>
+
+    <script type="text/javascript">
+
+      //这里可以注册全局的 组件，指令，过滤器...
+      Vue.component("father",{
+        template:"#father",
+        components:{
+          "son":{
+            template:"#son",
+            data:function(){
+              return { names: ["1","2","3","4"]}
+            }
+          }
+        }
+      })
+
+      let vue1 = new Vue({
+        el:'#app1',
+        data:{
+          //注意自定义组件时，写法不同，是以函数的方式返回
+        },
+        methods:{
+        },
+        computed:{
+          //计算属性的特点就是 只要返回结果没有发生变化 那么就只会被执行一次
+        },
+        components:{
+          //自定义局部组件
+        },
+        filters:{
+          //自定义局部过滤器
+        },
+        directives:{
+          //自定义局部指令
+        }
+      })
+
+    </script>
+  </body>
+</html>
+
+<!-- 指令可看作标签属性 -->

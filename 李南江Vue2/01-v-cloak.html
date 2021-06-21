@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      [v-cloak]{display: none}
+    </style>
+    <script src="./js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p v-cloak>{{name}}</p>
+    </div>
+
+    <script type="text/javascript">
+      let vue = new Vue({
+        el:'#app',
+        data:{
+          name:'刘声伟'
+        }
+      })
+    </script>
+  </body>
+</html>
+
+<!-- 当数据未解析完成时会渲染什么样式。例如不显示。这时候会用到v-cloak -->
+<!-- 数据驱动界面的更新 无需手动操作 -->

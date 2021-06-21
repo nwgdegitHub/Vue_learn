@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      *{
+        margin:0;
+        padding: 0;
+      }
+
+    </style>
+    <script src="./js/vue.js"></script>
+  </head>
+  <body>
+
+    <!--
+
+    不是可以通过prop传递数据吗？ 那如果是希望添加内容，在标签中，这样更合乎规范与认知一点，这时候就用到了插槽
+
+    //这时后可以使用插槽 来实现
+  //插槽不同于prop 添加的内容更广 , prop更多的适合于传递数据，但插槽可以传一段html, 数据
+
+
+  它要解决什么场景的问题呢？ 我们在构建页面过程中一般会把用的比较多的公共的部分抽取出来作为一个单独的组件，
+  但是在实际使用这个组件的时候却又不能完全的满足需求，我希望在这个组件中添加一点东西，这时候我们就需要用到插槽来分发内容。
+
+  这也是之前说的动态修改子组件内容
+  
+-->
+
+        <div id="app1">
+          <h1>我是app1控制的区域</h1>
+          <father></father>
+        </div>
+
+    <template id="father">
+      <div>
+        <son>
+          <div>
+            我是使用插槽的时候填充的内容
+            <h1>来个h1瞧瞧</h1>
+          </div>
+        </son>
+      </div>
+    </template>
+
+    <template id="son">
+      <div>
+        <div>我是头部</div>
+        <!--
+        这里的slot标签就是插槽
+        一个插槽就是一个坑
+        插槽可以指定默认数据
+        插槽可以指定名称 默认叫匿名插槽
+        插槽可以有多个 有多少个就用数据填充多少个
+      -->
+        <slot>我是插槽的默认数据</slot>
+        <slot>我是插槽的默认数据</slot>
+        <div>我是底部</div>
+      </div>
+    </template>
+
+
+
+    <script type="text/javascript">
+
+      //这里可以注册全局的 组件，指令，过滤器...
+      Vue.component("father",{
+        template:"#father",
+      });
+      Vue.component("son",{
+        template:"#son",
+      });
+
+      let vue1 = new Vue({
+        el:'#app1',
+        data:{
+          //注意自定义组件时，写法不同，是以函数的方式返回
+        },
+        methods:{
+        },
+        computed:{
+          //计算属性的特点就是 只要返回结果没有发生变化 那么就只会被执行一次
+        },
+        components:{
+          //自定义局部组件
+        },
+        filters:{
+          //自定义局部过滤器
+        },
+        directives:{
+          //自定义局部指令
+        }
+      })
+
+    </script>
+  </body>
+</html>
+
+<!-- 指令可看作标签属性 -->

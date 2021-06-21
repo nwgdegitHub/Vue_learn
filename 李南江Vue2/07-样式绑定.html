@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      *{
+        margin:0;
+        padding: 0;
+      }
+      .size{
+        font-size: 20px;
+      }
+      .color{
+        color: red;
+      }
+      .active{
+        background: skyblue;
+      }
+
+    </style>
+    <script src="./js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p :style="{color:'red','font-size':'100px'}">试试样式绑定</p>
+      <p :style="[objStyle,objStyle2]">试试用一个对象绑定样式</p>
+    </div>
+
+    <script type="text/javascript">
+      let vue = new Vue({
+        el:'#app',
+        data:{
+          name:'刘声伟',
+          flag:false,
+          obj:{
+            'size':true,
+            'color':true,
+            'active':false
+          },
+          objStyle:{
+            'color':'red',
+            'font-size':'100px'
+          },
+          objStyle2:{
+            'background-color': 'skyblue'
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
+
+<!-- 数据驱动界面的更新 无需手动操作
+注意格式
+ -->
