@@ -13,15 +13,15 @@ export default {
   name: 'App',
   setup(){
     let obj = {name: 'lw', age: 18}; //
-    obj = markRaw(obj)  //禁止追踪obj的变化
+    obj = markRaw(obj)  //禁止追踪obj的变化 也就是说数据会改变 但不会触发UI刷新
     let state = reactive(obj); //Proxy对象
 
 
     function myFn(){
       obj.name = 'zhangsan' //并不能触发UI刷新
-      state.name = 'wangwu' //能触发UI刷新
-      console.log(obj);
-      console.log(state);
+      state.name = 'wangwu' //不能触发UI刷新
+      console.log(obj);//{name: "wangwu", age: 18, __v_skip: true}
+      console.log(state);//{name: "wangwu", age: 18, __v_skip: true}
 
     }
     return {state, myFn}

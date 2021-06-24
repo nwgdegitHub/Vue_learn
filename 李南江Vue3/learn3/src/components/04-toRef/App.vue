@@ -24,9 +24,9 @@ export default {
     //...
 
     function myFn(){
-      obj.name = 'zhangsan' //并不能触发UI刷新
+      obj.name = 'zhangsan' //并不能触发UI刷新, 因为obj不是响应式数据
       state.name = 'wangwu' //toRef() 也不能触发UI刷新
-      console.log(obj); //{name: "zhangsan", age: 18}
+      console.log(obj); //
       console.log(state); //
 
     }

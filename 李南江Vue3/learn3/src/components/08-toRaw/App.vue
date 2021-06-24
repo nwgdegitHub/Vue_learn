@@ -17,17 +17,17 @@ export default {
     console.log(obj === state); // false
     let obj2 = toRaw(state)
     console.log(obj2 === state);
-
+    console.log(obj2 === obj);
 
     let stateRef = ref(obj)
     console.log(toRaw(stateRef.value)); //注意从 ref 拿原始数据，要加value
 
 
     function myFn(){
-      obj.name = 'zhangsan' //并不能触发UI刷新
+      obj.name = 'zhangsan' //并不能触发UI刷新, 因为obj不是响应式数据
       state.name = 'wangwu' //能触发UI刷新
-      console.log(obj);
-      console.log(state);
+      console.log(obj); //{name: "wangwu", age: 18}
+      console.log(state); //Proxy {name: "wangwu", age: 18}
 
     }
     return {state, myFn}

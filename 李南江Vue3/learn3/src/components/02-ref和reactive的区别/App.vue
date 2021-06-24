@@ -17,7 +17,7 @@ import {ref, reactive, isRef, isReactive} from 'vue'
 export default {
   name: 'App',
   setup(){
-    const age1 = ref(18);
+    const age1 = ref(18); //实质是reactive({value: 18})
     const age2 = reactive({value: 19})
 
     //一般ref用来包装简单的数据 reactive用来包装obj/arr 不要下面这么用

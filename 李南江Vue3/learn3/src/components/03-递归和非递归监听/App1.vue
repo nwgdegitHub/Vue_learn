@@ -48,7 +48,8 @@ export default {
    })
 
    function myFn(){
-     state.a = '1';
+     //区别就是看不改变第一层 还会不会继续往下递归
+     // state.a = '1';
      state.gf.b = '2';
      state.gf.f.c = '3';
      state.gf.f.s.d = '4';
@@ -82,9 +83,9 @@ export default {
        }
      }
 
-     state2.value.a = 111; //带了.value 有效
+     // state2.value.a = 111; //带了.value 有效
 
-     console.log(state2.value);
+     // console.log(state2.value);
 
    }
 
