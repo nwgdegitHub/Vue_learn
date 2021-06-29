@@ -48,7 +48,7 @@ export default {
    })
 
    function myFn(){
-     //区别就是看不改变第一层 还会不会继续往下递归
+     //看不改变第一层 还会不会继续往下递归?
      // state.a = '1';
      state.gf.b = '2';
      state.gf.f.c = '3';
@@ -70,20 +70,23 @@ export default {
    })
 
    function myFn2(){
-     state2.value = { //带了.value 有效
-       a: '1',
-       gf: {
-         b: '2',
-         f: {
-           c: '3',
-           s: {
-             d: '4'
-           }
-         }
-       }
-     }
-
+     // state2.value = { //带了.value 有效
+     //   a: '1',
+     //   gf: {
+     //     b: '2',
+     //     f: {
+     //       c: '3',
+     //       s: {
+     //         d: '4'
+     //       }
+     //     }
+     //   }
+     // }
+     //看不改变第一层 还会不会继续往下递归?
      // state2.value.a = 111; //带了.value 有效
+     state2.value.gf.b = '2';
+     state2.value.gf.f.c = '3';
+     state2.value.gf.f.s.d = '4';
 
      // console.log(state2.value);
 

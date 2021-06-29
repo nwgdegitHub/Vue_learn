@@ -22,13 +22,13 @@
 
 <script>
 import {ref} from 'vue';
-import useRemoveStu from './js/remove'
-import useAddStu from './js/add'
+import useRemoveStu from '../js/remove'
+import useAddStu from '../js/add'
 
 export default {
   name: 'App3',
-  setup(){//组合API的入口函数
-
+  setup(props, context){//组合API的入口函数
+    console.log(props, context);//Proxy {}[[Handler]]: Object[[Target]]: Proxy[[IsRevoked]]: false {expose: ƒ}
     // let count = 1;
 
     let count = ref(0);
@@ -42,7 +42,7 @@ export default {
     }
 
     let {state, delStu} = useRemoveStu()
-    let {state2, addStu} = useAddStu()
+    let {state2, addStu} = useAddStu(state)
 
 
     return {count, myFunc, state, delStu, addStu, state2} //定义的变量/方法 都要暴露出去

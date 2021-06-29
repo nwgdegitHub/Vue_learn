@@ -1,3 +1,8 @@
 创建项目：
 Vite是Vue作者开发的一款意图取代webpack的工具
 npm install -g create-vite-app
+
+Vue3的变化：
+组合API
+diff算法性能提升，做记号，需要更新的就更新，不做全量更新
+还有一点区别就是导入了内容没使用, 不会报错

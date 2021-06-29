@@ -14,7 +14,7 @@
 所以当你想让响应式数据和以前的数据关联起来，并且更新响应式数据之后不刷新UI， 就可以用toRef
 */
 
-import {reactive,ref,toRef} from 'vue'
+import {reactive,ref,toRef, toRaw} from 'vue'
 
 export default {
   name: 'App',
@@ -26,8 +26,9 @@ export default {
     function myFn(){
       obj.name = 'zhangsan' //并不能触发UI刷新, 因为obj不是响应式数据
       state.name = 'wangwu' //toRef() 也不能触发UI刷新
-      console.log(obj); //
-      console.log(state); //
+      console.log(obj); // {name: "zhangsan", age: 18}
+      console.log(state); // ObjectRefImpl {_object: {…}, _key: "name", __v_isRef: true, name: "wangwu"}
+
 
     }
     return {state, myFn}

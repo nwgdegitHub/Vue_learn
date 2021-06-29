@@ -5,15 +5,15 @@
 
 <script>
 
-import {reactive,ref,onMouted} from 'vue'
+import {reactive,ref,onMounted} from 'vue'
 
 export default {
   name: 'App',
   setup(){
     let box = ref(null)
 
-    onMouted(()=>{
-      console.log("onMouted",box.value);
+    onMounted(()=>{
+      console.log("onMounted",box.value);
     });
 
     console.log(box.value);

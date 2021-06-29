@@ -25,8 +25,9 @@ export default {
     const age4 = reactive(101)
 
     function changeRef(){
-      age1.value = 188
+      age1.value = 188 //有效
       age3.num = 888 //无效
+      age3.value.num = 888 //有效, //实质是reactive({value: {num: 999}})
       console.log(isRef(age1));
 
     }

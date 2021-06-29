@@ -94,20 +94,23 @@ export default {
 
    function myFn2(){
      // 不带.value 无效修改
-     state2.value = {
-       a: '101',
-       gf: {
-         b: '2',
-         f: {
-           c: '3',
-           s: {
-             d: '4'
-           }
-         }
-       }
-     }
+     // state2.value = {
+     //   a: '101',
+     //   gf: {
+     //     b: '2',
+     //     f: {
+     //       c: '3',
+     //       s: {
+     //         d: '4'
+     //       }
+     //     }
+     //   }
+     // }
 
      // state2.value.a = 111; //报错
+     state2.value.gf.b = '2';
+     state2.value.gf.f.c = '3';
+     state2.value.gf.f.s.d = '4'; //这里注释第一层 可以看到UI没有刷新 说明没有往下递归
 
      console.log(state2.value);
 
