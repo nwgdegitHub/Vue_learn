@@ -10,7 +10,7 @@ import {reactive,ref,onMounted} from 'vue'
 export default {
   name: 'App',
   setup(){
-    let box = ref(null)
+    let box = ref(null) //参数不传 或者传null
 
     onMounted(()=>{
       console.log("onMounted",box.value);

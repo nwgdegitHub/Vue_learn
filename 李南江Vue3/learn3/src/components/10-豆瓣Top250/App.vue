@@ -4,7 +4,7 @@
   <h2>豆瓣Top250</h2>
   <!-- <button @click="fetchData">Success</button> -->
 
-<!-- https://img2.doubanio.com/view/photo/s_ratio_poster/public/p480747492.webp -->
+  <!-- https://img2.doubanio.com/view/photo/s_ratio_poster/public/p480747492.webp -->
   <!-- <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171222%2F3b936ed58b6c4226b51355c3a6786553.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1627458132&t=008d6885deec112c5f1186b94dc8b212
 " alt="" class="fengmian"> -->
   <!-- <p>{{pages}}</p> -->
@@ -141,16 +141,63 @@ export default {
 
       return res
     } );
-    
+
     function fetchData(){
 
     }
 
-    function handleToggle(){}
+    //跳转详情
+    function handleToggle(id){
 
-    function handleCollect(){}
+    }
 
-    function handleDelete(){}
+    function handleCollect(id){
+
+      var datas = movies.items;
+      var item = datas.find( item => {
+          return item._id == id;
+      })
+      if( item.collect){
+          item.collect = false
+           $.ajax({
+              url:"http://localhost:8082/top250/collect/cancel",
+              data:{id},
+              type:"post",
+              success:res=>{
+                  console.log(res);
+
+              }
+          })
+      }
+      else{
+          item.collect = true
+           $.ajax({
+              url:"http://localhost:8082/top250/collect",
+              data:{id},
+              type:"post",
+              success:res=>{
+                  console.log(res);
+
+              }
+          })
+      }
+    }
+
+    function handleDelete(id){
+      $.ajax({
+              url:"http://localhost:8082/top250/delete",
+              data:{id},
+              type:"post",
+              success:res=>{
+                  console.log(res);
+                  var datas = movies.items.filter(item=>{
+                      return item._id != id
+                  })
+                  movies.items = datas
+
+              }
+          })
+    }
 
     //下一页
     function doPage(item){

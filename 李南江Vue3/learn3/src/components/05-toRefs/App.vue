@@ -24,11 +24,12 @@ export default {
 
     function myFn(){
 
-      console.log(state);
-      state.name.value = "zhangsan" //为什么不是state.value.name ?
+      console.log(state); //{name: ObjectRefImpl, age: ObjectRefImpl}
+      state.name.value = "zhangsan" //为什么不是state.value.name ? 不是， toRefs（）返回的是一种特别的类型
       state.age.value = 999
 
       console.log(obj); //此时原始数据也跟着变了
+      console.log(state0); //此时原始数据也跟着变了
       console.log(state);
     }
 
